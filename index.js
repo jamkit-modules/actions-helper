@@ -14,7 +14,7 @@ var module = (function() {
                     delete global["actions__on_request_" + request_id];
                 }        
                 
-                controller.action("script", Object.assign(params, {
+                controller.action("script", Object.assign(params || {}, {
                     "script": script,
                     "subview": subview,
                     "return-script": "actions__on_request_" + request_id,
@@ -24,7 +24,7 @@ var module = (function() {
         },
 
         resolve: function(params, data) {
-            controller.action("script", Object.assign(data, {
+            controller.action("script", Object.assign(data || {}, {
                 "script": params["return-script"],
                 "subview": params["return-subview"],
                 "callback": "resolve"
@@ -32,7 +32,7 @@ var module = (function() {
         },
 
         reject: function(params, error) {
-            controller.action("script", Object.assign(error, {
+            controller.action("script", Object.assign(error || {}, {
                 "script": params["return-script"],
                 "subview": params["return-subview"],
                 "callback": "reject"
