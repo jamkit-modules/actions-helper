@@ -12,8 +12,8 @@ var module = (function() {
                     }
 
                     delete global["actions__on_request_" + request_id];
-                }        
-                
+                }
+
                 controller.action("script", Object.assign(params || {}, {
                     "script": script,
                     "subview": subview,
@@ -27,6 +27,9 @@ var module = (function() {
             controller.action("script", Object.assign(data || {}, {
                 "script": params["return-script"],
                 "subview": params["return-subview"],
+                "routes-to-topmost": params["routes-to-topmost"] || "no",
+                "app": params["source-app"] || "",
+                "routes-to-app": params["source-app"] ? "yes" : "no",
                 "callback": "resolve"
             }));
         },
@@ -35,6 +38,9 @@ var module = (function() {
             controller.action("script", Object.assign(error || {}, {
                 "script": params["return-script"],
                 "subview": params["return-subview"],
+                "routes-to-topmost": params["routes-to-topmost"] || "no",
+                "app": params["source-app"] || "",
+                "routes-to-app": params["source-app"] ? "yes" : "no",
                 "callback": "reject"
             }));
         },
