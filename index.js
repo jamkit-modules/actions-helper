@@ -27,7 +27,7 @@ var module = (function() {
             return new Promise(function(resolve, reject) {
                 const request_id = (Math.random() * 10000).toFixed(0);
 
-                global.exports = global.exports ? global.exports : {}
+                global.exports = global.hasOwnProperty("exports") ? global.exports : {}
                 global.exports["actions__on_request_" + request_id] = function(result) { 
                     if (result["callback"] === "resolve") {
                         resolve(result);
