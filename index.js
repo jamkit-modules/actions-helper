@@ -14,12 +14,12 @@ var module = (function() {
                     delete global["actions__on_request_" + request_id];
                 }
 
-                controller.action("script", Object.assign(params || {}, {
+                controller.action("script", Object.assign({
                     "script": script,
                     "subview": subview,
                     "return-script": "actions__on_request_" + request_id,
-                    "return-subview": $data["SUBVIEW"]
-                }));
+                    "return-context": $env["CONTEXT"]
+                }, params || {}));
             });
         },
 
@@ -37,36 +37,34 @@ var module = (function() {
                     delete global["actions__on_request_" + request_id];
                 }
 
-                controller.action("script", Object.assign(params || {}, {
+                controller.action("script", Object.assign({
                     "script": script,
                     "app": app,
                     "routes-to-app": "yes",
                     "return-script": "actions__on_request_" + request_id,
-                    "return-subview": $data["SUBVIEW"]
-                }));
+                    "return-context": $env["CONTEXT"]
+                }, params || {}));
             });
         },
 
         resolve: function(params, data) {
-            controller.action("script", Object.assign(data || {}, {
+            controller.action("script", Object.assign({
                 "script": params["return-script"],
-                "subview": params["return-subview"],
-                "routes-to-topmost": params["return-to-topmost"] || "no",
+                "context": params["return-context"],
                 "app": params["source-app"] || "",
                 "routes-to-app": params["source-app"] ? "yes" : "no",
                 "callback": "resolve"
-            }));
+            }, data || {}));
         },
 
         reject: function(params, error) {
-            controller.action("script", Object.assign(error || {}, {
+            controller.action("script", Object.assign({
                 "script": params["return-script"],
-                "subview": params["return-subview"],
-                "routes-to-topmost": params["return-to-topmost"] || "no",
+                "context": params["return-context"],
                 "app": params["source-app"] || "",
                 "routes-to-app": params["source-app"] ? "yes" : "no",
                 "callback": "reject"
-            }));
+            }, error || {}));
         },
     }
 })();
