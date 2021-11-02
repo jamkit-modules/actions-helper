@@ -18,7 +18,7 @@ var module = (function() {
                     "script": script,
                     "subview": subview,
                     "return-script": "actions__on_request_" + request_id,
-                    "return-subview": $data["SUBVIEW"],
+                    "return-subview": $env["SUBVIEW"],
                     "return-context": $env["CONTEXT"]
                 }, params || {}));
             });
@@ -44,7 +44,7 @@ var module = (function() {
                     "app": app,
                     "routes-to-app": "yes",
                     "return-script": "actions__on_request_" + request_id,
-                    "return-subview": $data["SUBVIEW"],
+                    "return-subview": $env["SUBVIEW"],
                     "return-context": $env["CONTEXT"]
                 }, params || {}));
             });
