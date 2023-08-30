@@ -1,10 +1,10 @@
-var module = (function() {
+const module = (() => {
     return {
-        invoke: function(subview, script, params) {
-            return new Promise(function(resolve, reject) {
+        invoke: (subview, script, params) => {
+            return new Promise((resolve, reject) => {
                 const request_id = (Math.random() * 10000).toFixed(0);
 
-                global["actions__on_request_" + request_id] = function(result) { 
+                global["actions__on_request_" + request_id] = (result) => { 
                     if (result["callback"] === "resolve") {
                         resolve(result);
                     } else {
@@ -24,12 +24,12 @@ var module = (function() {
             });
         },
 
-        invoke_app: function(app, script, params) {
-            return new Promise(function(resolve, reject) {
+        invoke_app: (app, script, params) => {
+            return new Promise((resolve, reject) => {
                 const request_id = (Math.random() * 10000).toFixed(0);
 
                 global.exports = global.hasOwnProperty("exports") ? global.exports : {}
-                global.exports["actions__on_request_" + request_id] = function(result) { 
+                global.exports["actions__on_request_" + request_id] = (result) => { 
                     if (result["callback"] === "resolve") {
                         resolve(result);
                     } else {
@@ -50,7 +50,7 @@ var module = (function() {
             });
         },
 
-        resolve: function(params, data) {
+        resolve: (params, data) => {
             controller.action("script", Object.assign({
                 "script": params["return-script"],
                 "subview": params["return-subview"],
@@ -61,7 +61,7 @@ var module = (function() {
             }, data || {}));
         },
 
-        reject: function(params, error) {
+        reject: (params, error) => {
             controller.action("script", Object.assign({
                 "script": params["return-script"],
                 "subview": params["return-subview"],
