@@ -1,6 +1,6 @@
-const module = (() => {
+const module = (function() {
     return {
-        invoke: (subview, script, params) => {
+        invoke: function(subview, script, params) {
             return new Promise((resolve, reject) => {
                 const request_id = (Math.random() * 10000).toFixed(0);
 
@@ -24,7 +24,7 @@ const module = (() => {
             });
         },
 
-        invoke_app: (app, script, params) => {
+        invoke_app: function(app, script, params) {
             return new Promise((resolve, reject) => {
                 const request_id = (Math.random() * 10000).toFixed(0);
 
@@ -50,7 +50,7 @@ const module = (() => {
             });
         },
 
-        resolve: (params, data) => {
+        resolve: function(params, data) {
             controller.action("script", Object.assign({
                 "script": params["return-script"],
                 "subview": params["return-subview"],
@@ -61,7 +61,7 @@ const module = (() => {
             }, data || {}));
         },
 
-        reject: (params, error) => {
+        reject: function(params, error) {
             controller.action("script", Object.assign({
                 "script": params["return-script"],
                 "subview": params["return-subview"],
